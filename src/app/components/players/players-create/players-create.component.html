@@ -1,0 +1,25 @@
+<app-header></app-header>
+<div class="login-page">
+    <div class="form">
+        <form class="login-form">
+            <h4>Create a new Player:<br> <br></h4>
+            <input [(ngModel)]="playerCreateData.firstname" name="firstname" type="text" placeholder="firstname" ngModel required/>
+            <input [(ngModel)]="playerCreateData.lastname" name="lastname" type="text" placeholder="lastname" ngModel required/>
+            <input [(ngModel)]="playerCreateData.age" name="age" type="number" placeholder="age" min="16" max="55" ngModel required/>
+            <input [(ngModel)]="playerCreateData.length" name="length" type="number" placeholder="length" ngModel required/>
+            <input [(ngModel)]="playerCreateData.weight" name="weight" type="number" placeholder="weight" ngModel required/>
+            <input [(ngModel)]="playerCreateData.imageLink" name="imageLink" type="text" placeholder="imageLink" ngModel required/>
+            <select [(ngModel)]="playerCreateData.club" type="text" class="form-control" id="club" name="club" ngModel required>
+                <option *ngFor="let club of clubs">{{club._id}}</option> 
+            </select> 
+            <button routerLink="/players" routerLinkActive="active" (click)="createPlayer()" type="button" class="btn btn-warning warningbutton">Confirm</button>
+        </form>
+        <a routerLink="/players" routerLinkActive="active" class="btn btn-primary mt-2">Return</a>
+    </div>
+</div>
+<div *ngIf="showResultBox">
+    <div class="content login-page form login-form">
+        <h4>{{displayresult.result}}</h4>
+        <p>{{displayresult.message}}</p>
+    </div>
+</div>

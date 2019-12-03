@@ -1,0 +1,36 @@
+<div *ngIf="showMePartially">
+  <div *ngIf="player">
+    <div class="content login-page form login-form">
+      <h5 class="card-title">Edit Player: {{player.firstname + player.lastname}}</h5>
+      <hr />
+      <div class="card-text">
+        <b>Firstname (old: {{player.firstname}}):</b>
+        <br>
+        <input [(ngModel)]="playerNewFirstame" name="firstname" type="text" placeholder="firstname" />
+        <br>
+        <b>Lastname (old: {{player.lastname}}):</b>
+        <input [(ngModel)]="playerNewLastname" name="lastname" type="text" placeholder="lastname" />
+        <br>
+        <b>Age (old: {{player.age}}):</b>
+        <input [(ngModel)]="playerNewAge" name="age" type="text" placeholder="age" />
+        <br>
+        <b>Length (old: {{player.length}}):</b>
+        <input [(ngModel)]="playerNewLength" name="length" type="text" placeholder="length" />
+        <br>
+        <b>Weight (old: {{player.weight}}):</b>
+        <input [(ngModel)]="playerNewWeight" name="weight" type="text" placeholder="weight" />
+        <br>
+        <b>Image (old: {{player.imageLink}}):</b>
+        <input [(ngModel)]="playerNewImage" name="imageLink" type="text" placeholder="imageLink" />
+        <br>
+        <b>Club (old: {{player.club.name}}):</b>
+        <!-- <input [(ngModel)]="playerNewClub" name="club" type="range" placeholder="club" /> -->
+        <select [(ngModel)]="playerNewClub" type="text" class="form-control" id="club" name="club">
+            <option *ngFor="let club of clubs">{{club._id}}</option> 
+          </select> 
+      </div>
+      <a (click)="editPlayer()" class="btn btn-warning mt-2 mr-2">Confirm</a>
+      <a (click)="cancel()" class="btn btn-primary mt-2 mr-2">Cancel</a>
+    </div>
+  </div>
+</div>

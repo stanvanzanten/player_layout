@@ -1,0 +1,144 @@
+<app-header></app-header>
+<div class="container pt-5">
+  <div class="row">
+    <div class="col-9">
+      <div class="row">
+        <h1>Over deze applicatie</h1>
+        <p>Deze applicatie is gemaakt in het kader van het vak 'Clientside web frameworks' van Avans Hogeschool Breda.
+          Dit is een applicatie om voetbal spelers en clubs up to date te houden.</p>
+      </div>
+      <div class="row">
+        <h3>PlayerBase</h3>
+        <p>Hier beschrijft je wat je project inhoudt. Beschrijf ook de entiteiten/domeinobjecten die je gebruikt, en
+          benoem per
+          entiteit de attributen met hun datatype.
+          Binnen deze applicatie kunnen de gebruikers inloggen om een speler/club aan te maken, te bekijken, wijzigen of
+          te verwijderen. Alles spelers hebben bepaalde attributen zoals: voornaam(string), achternaam(string),
+          leeftijd(number), lengte(number), gewicht(number), een afbeelding(string) en club(Club Object). Zo heeft
+          iedere club ook een naam(string), jaar van opriching(number), fonds(number), een afbeelding(string) en spelers(array van speler
+          objects). Iedere gebruiker heeft een naam(string), nickname(string) en een wachtwoord(string).</p>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <img src="../../../assets/img/Stan.jpg" class="card-img-top" alt="Stan">
+        <div class="card-body text-center">
+          <h5 class="card-title">Stan van Zanten</h5>
+          <p class="card-text">2109204
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h3>Entiteiten</h3>
+    </div>
+    <div class="col-4">
+      <p>User</p>
+      <ul>
+        <li>Naam: string</li>
+        <li>Nickname: string</li>
+        <li>Wachtwoord: string</li>
+      </ul>
+    </div>
+    <div class="col-4">
+      <p>Speler</p>
+      <ul>
+        <li>Voornaam: string</li>
+        <li>Achternaam: string</li>
+        <li>Leeftijd: number</li>
+        <li>Lengte: number</li>
+        <li>Afbeelding: string</li>
+        <li>Club: Club Object</li>
+      </ul>
+    </div>
+    <div class="col-4">
+      <p>Club</p>
+      <ul>
+        <li>Naam: string</li>
+        <li>Fonds: number</li>
+        <li>Jaar van opriching: number</li>
+        <li>Afbeelding: string</li>
+        <li>Spelers: lijst van speler objecten</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h3>Use cases</h3>
+      <p>De applicatie bied de volgende functionaliteit.</p>
+      <table class="table table-sm table-bordered">
+        <tbody>
+          <tr class="table-primary">
+            <th scope="row" style="width: 16.66%">Naam</th>
+            <td><strong>UC-01 Registreren</strong></td>
+          </tr>
+          <tr>
+            <th scope="row">Beschrijving</th>
+            <td>Hiermee registreert een gebruiker.</td>
+          </tr>
+          <tr>
+            <th scope="row">Actor</th>
+            <td>Reguliere gebruiker</td>
+          </tr>
+          <tr>
+            <th scope="row">Preconditie</th>
+            <td>Geen</td>
+          </tr>
+          <tr>
+            <th scope="row">Scenario</th>
+            <td>
+              <ol>
+                <!---->
+                <li>Gebruiker vult gebruikersnaam en password in en klikt op register knop.</li>
+                <li>De applicatie valideert de ingevoerde gegevens.</li>
+                <li>Indien gegevens correct zijn dan redirect de applicatie naar het startscherm en is de gebruiker automatisch ingelogd.</li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Postconditie</th>
+            <td>De actor is ingelogd en heeft een account aangemaakt</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-sm table-bordered">
+        <tbody>
+          <tr class="table-primary">
+            <th scope="row" style="width: 16.66%">Naam</th>
+            <td><strong>UC-02 Inloggen</strong></td>
+          </tr>
+          <tr>
+            <th scope="row">Beschrijving</th>
+            <td>Hiermee logt een bestaande gebruiker in.</td>
+          </tr>
+          <tr>
+            <th scope="row">Actor</th>
+            <td>Reguliere gebruiker</td>
+          </tr>
+          <tr>
+            <th scope="row">Preconditie</th>
+            <td>Geen</td>
+          </tr>
+          <tr>
+            <th scope="row">Scenario</th>
+            <td>
+              <ol>
+                <!---->
+                <li>Gebruiker vult gebruikersnaam en password in en klikt op Login knop.</li>
+                <li>De applicatie valideert de ingevoerde gegevens.</li>
+                <li>Indien gegevens correct zijn dan redirect de applicatie naar het startscherm.</li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Postconditie</th>
+            <td>De actor is ingelogd</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

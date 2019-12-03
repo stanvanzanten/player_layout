@@ -1,0 +1,21 @@
+<app-header></app-header>
+<br>
+<div class="row">
+    <div class="col-3 pb-3" *ngFor="let club of clubs">
+      <div *ngIf="isPopClub(club)">
+        <h4>{{club.name}}</h4>
+        <h5 class="card-title">
+          <img [src]="club.logo" alt="" class="img-rounded imagelogo">
+        </h5>
+        <a (click)="onSelect(club)" class="btn btn-success">More info</a>
+      </div>
+  </div>
+  <div class="col-9">
+      <app-clubs-detail [club]="selectedClub"></app-clubs-detail>
+    </div>
+</div>
+<br>
+<div class="createbutton">
+  <a *ngIf="authService.loggedIn()" routerLink='/club/create' routerLinkActive="active" class="btn btn-success">Create
+    club</a>
+</div>

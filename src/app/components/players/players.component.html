@@ -1,0 +1,21 @@
+<app-header></app-header>
+<br>
+<div class="row">
+    <div class="col-4 pb-3" *ngFor="let player of players">
+      <div *ngIf="isPopPlayer(player)">
+        <h4>{{player.firstname}}</h4>
+        <h5 class="card-title">
+          <img [src]="player.imageLink" alt="" class="img-rounded imagelogo">
+        </h5>
+        <a (click)="onSelect(player)" class="btn btn-success">More info</a>
+      </div>
+    </div>
+  <div class="col-8">
+      <app-players-detail [player]="selectedPlayer"></app-players-detail>
+    </div>
+</div>
+<br>
+<div class="createbutton">
+    <a *ngIf="authService.loggedIn()" routerLink='/player/create' routerLinkActive="active" class="btn btn-success">Create
+      player</a>
+  </div>
