@@ -16,7 +16,7 @@ app.use(compression());
 //
 // Replace the name below to match your own "defaultProject" value!
 //
-const appname = 'angular-heroku';
+const appname = 'PlayerLayout';
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist', appname)));
@@ -27,7 +27,7 @@ app.get('*', (req, res) => {
 });
 
 // Get port from environment and store in Express.
-const port = process.env.PORT || '4200';
+const port = process.env.PORT || '8000';
 app.set('port', port);
 // Create HTTP server.
 const server = http.createServer(app);
