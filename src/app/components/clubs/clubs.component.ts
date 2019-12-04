@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Club } from 'src/app/models/club.model';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -14,13 +15,14 @@ import { Club } from 'src/app/models/club.model';
   providedIn: 'root'
 })
 export class ClubsComponent implements OnInit {
-
+  
   clubs = []
   id : number;
   selectedClub : Club;
   @Input() importClub: Club;
   searchClub: string;
   emptyClub: Club;
+
 
   constructor(private _backendService : BackendService, private authService: AuthService) { }
 
@@ -30,6 +32,7 @@ export class ClubsComponent implements OnInit {
       res => this.clubs = res,
       err => console.log(err)
     )
+
   }
 
   refreshClubs() {

@@ -1,4 +1,3 @@
-<app-header></app-header>
 <div class="container pt-5">
   <div class="row">
     <div class="col-9">
@@ -15,7 +14,8 @@
           Binnen deze applicatie kunnen de gebruikers inloggen om een speler/club aan te maken, te bekijken, wijzigen of
           te verwijderen. Alles spelers hebben bepaalde attributen zoals: voornaam(string), achternaam(string),
           leeftijd(number), lengte(number), gewicht(number), een afbeelding(string) en club(Club Object). Zo heeft
-          iedere club ook een naam(string), jaar van opriching(number), fonds(number), een afbeelding(string) en spelers(array van speler
+          iedere club ook een naam(string), jaar van opriching(number), fonds(number), een afbeelding(string) en
+          spelers(array van speler
           objects). Iedere gebruiker heeft een naam(string), nickname(string) en een wachtwoord(string).</p>
       </div>
     </div>
@@ -70,7 +70,7 @@
       <p>De applicatie bied de volgende functionaliteit.</p>
       <table class="table table-sm table-bordered">
         <tbody>
-          <tr class="table-primary">
+          <tr class="table-success">
             <th scope="row" style="width: 16.66%">Naam</th>
             <td><strong>UC-01 Registreren</strong></td>
           </tr>
@@ -93,7 +93,8 @@
                 <!---->
                 <li>Gebruiker vult gebruikersnaam en password in en klikt op register knop.</li>
                 <li>De applicatie valideert de ingevoerde gegevens.</li>
-                <li>Indien gegevens correct zijn dan redirect de applicatie naar het startscherm en is de gebruiker automatisch ingelogd.</li>
+                <li>Indien gegevens correct zijn dan redirect de applicatie naar het startscherm en is de gebruiker
+                  automatisch ingelogd.</li>
               </ol>
             </td>
           </tr>
@@ -106,7 +107,7 @@
 
       <table class="table table-sm table-bordered">
         <tbody>
-          <tr class="table-primary">
+          <tr class="table-success">
             <th scope="row" style="width: 16.66%">Naam</th>
             <td><strong>UC-02 Inloggen</strong></td>
           </tr>
@@ -136,6 +137,158 @@
           <tr>
             <th scope="row">Postconditie</th>
             <td>De actor is ingelogd</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-sm table-bordered">
+        <tbody>
+          <tr class="table-success">
+            <th scope="row" style="width: 16.66%">Naam</th>
+            <td><strong>UC-03 Spelers/clubs ophalen</strong></td>
+          </tr>
+          <tr>
+            <th scope="row">Beschrijving</th>
+            <td>Hiermee kan de gebruiker spelers en clubs ophalen.</td>
+          </tr>
+          <tr>
+            <th scope="row">Actor</th>
+            <td>Reguliere gebruiker</td>
+          </tr>
+          <tr>
+            <th scope="row">Preconditie</th>
+            <td>Geen</td>
+          </tr>
+          <tr>
+            <th scope="row">Scenario</th>
+            <td>
+              <ol>
+                <!---->
+                <li>De gebruiker klikt op de link in de navigatiebalk 'spelers'/'clubs', of maakt gebruik van de grote
+                  afbeeldingen die als link fungeren.</li>
+                <li>De applicatie redirect de gebruiker naar de spelers/clubs pagina.</li>
+                <li>De applicatie laadt direct alle beschikbare speler/clubs in.</li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Postconditie</th>
+            <td>De gebruiker heeft een lijst van spelers/clubs</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-sm table-bordered">
+        <tbody>
+          <tr class="table-success">
+            <th scope="row" style="width: 16.66%">Naam</th>
+            <td><strong>UC-04 Een speler/club wijzigen</strong></td>
+          </tr>
+          <tr>
+            <th scope="row">Beschrijving</th>
+            <td>Hiermee kan de gebruiker de gegevens van een bestaande speler/club wijzigen.</td>
+          </tr>
+          <tr>
+            <th scope="row">Actor</th>
+            <td>Reguliere gebruiker</td>
+          </tr>
+          <tr>
+            <th scope="row">Preconditie</th>
+            <td>Inloggen</td>
+          </tr>
+          <tr>
+            <th scope="row">Scenario</th>
+            <td>
+              <ol>
+                <!---->
+                <li>De gebruiker navigeert naar de spelers/clubs pagina</li>
+                <li>De gebruiker klikt op de knop "Meer info" onder de speler/club die hij wil wijzigen.</li>
+                <li>De applicatie geeft alle gegevens van de speler/club weer, met daaronder 3 keuzes; Cancel, wijzigen
+                  en delete.</li>
+                <li>De gebruiker maakt gebruik van de knop wijzigen, waardoor er een wijziging form tevoorschijn komt.
+                </li>
+                <li>De gebruiker vult de gewenste gegevens in, en klikt daarna op "Save".</li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Postconditie</th>
+            <td>De speler/club is gewijzigd</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-sm table-bordered">
+        <tbody>
+          <tr class="table-success">
+            <th scope="row" style="width: 16.66%">Naam</th>
+            <td><strong>UC-05 Een speler/club verwijderen</strong></td>
+          </tr>
+          <tr>
+            <th scope="row">Beschrijving</th>
+            <td>Hiermee kan een gebruiker een bestaande speler/club verwijderen.</td>
+          </tr>
+          <tr>
+            <th scope="row">Actor</th>
+            <td>Reguliere gebruiker</td>
+          </tr>
+          <tr>
+            <th scope="row">Preconditie</th>
+            <td>Inloggen</td>
+          </tr>
+          <tr>
+            <th scope="row">Scenario</th>
+            <td>
+              <ol>
+                <!---->
+                <li>De gebruiker navigeert naar de spelers/clubs pagina</li>
+                <li>De gebruiker klikt op de knop "Meer info" onder de speler/club die hij wil verwijderen.</li>
+                <li>De applicatie geeft alle gegevens van de speler/club weer, met daaronder 3 keuzes; Cancel, wijzigen
+                  en delete.</li>
+                <li>De gebruiker maakt gebruik van de knop verwijderen.</li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Postconditie</th>
+            <td>De speler/club is verwijderd.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-sm table-bordered">
+        <tbody>
+          <tr class="table-success">
+            <th scope="row" style="width: 16.66%">Naam</th>
+            <td><strong>UC-06 Een speler/club aanmaken</strong></td>
+          </tr>
+          <tr>
+            <th scope="row">Beschrijving</th>
+            <td>Hiermee kan een gebruiker een nieuwe speler/club aanmaken.</td>
+          </tr>
+          <tr>
+            <th scope="row">Actor</th>
+            <td>Reguliere gebruiker</td>
+          </tr>
+          <tr>
+            <th scope="row">Preconditie</th>
+            <td>Inloggen</td>
+          </tr>
+          <tr>
+            <th scope="row">Scenario</th>
+            <td>
+              <ol>
+                <!---->
+                <li>De gebruiker navigeert naar de spelers/clubs pagina</li>
+                <li>De gebruiker klikt op de knop "Speler/Club aanmaken".</li>
+                <li>De applicatie redirect naar een nieuwe pagina met een form erop.</li>
+                <li>De gebruiker vult de gewenste gegevens van de speler/club in en drukt vervolgends op "Save"</li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Postconditie</th>
+            <td>Er is een nieuwe speler/club aangemaakt.</td>
           </tr>
         </tbody>
       </table>

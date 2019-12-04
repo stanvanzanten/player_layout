@@ -1,25 +1,115 @@
-<app-header></app-header>
 <div class="login-page">
     <div class="form">
-        <form class="login-form">
-            <h4>Create a new Player:<br> <br></h4>
-            <input [(ngModel)]="playerCreateData.firstname" name="firstname" type="text" placeholder="firstname" ngModel required/>
-            <input [(ngModel)]="playerCreateData.lastname" name="lastname" type="text" placeholder="lastname" ngModel required/>
-            <input [(ngModel)]="playerCreateData.age" name="age" type="number" placeholder="age" min="16" max="55" ngModel required/>
-            <input [(ngModel)]="playerCreateData.length" name="length" type="number" placeholder="length" ngModel required/>
-            <input [(ngModel)]="playerCreateData.weight" name="weight" type="number" placeholder="weight" ngModel required/>
-            <input [(ngModel)]="playerCreateData.imageLink" name="imageLink" type="text" placeholder="imageLink" ngModel required/>
-            <select [(ngModel)]="playerCreateData.club" type="text" class="form-control" id="club" name="club" ngModel required>
-                <option *ngFor="let club of clubs">{{club._id}}</option> 
-            </select> 
-            <button routerLink="/players" routerLinkActive="active" (click)="createPlayer()" type="button" class="btn btn-warning warningbutton">Confirm</button>
+        <form #playerCreateForm="ngForm" name="form" (ngSubmit)="playerCreateForm.form.valid && createPlayer()"
+            novalidate>
+            <h5>Add a new player.</h5>
+            <div class="form-group">
+                <b>Firstname:</b>
+                <input type="text" class="form-control" [(ngModel)]="playerCreateData.firstname" name="firstname"
+                    #firstname="ngModel"
+                    [ngClass]="{'is-invalid': firstname.invalid && (firstname.dirty || firstname.touched)}" required
+                    minlength="2" />
+                <div *ngIf="firstname.invalid && firstname.touched" class="invalid-feedback">
+                    <div *ngIf="firstname?.errors.required">First Name is required</div>
+                    <div *ngIf="firstname?.errors.minlength">First Name must be at least 2 characters long.</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b>Lastname:</b>
+                <input type="text" class="form-control" [(ngModel)]="playerCreateData.lastname" name="lastname"
+                    #lastname="ngModel"
+                    [ngClass]="{'is-invalid': lastname.invalid && (lastname.dirty || lastname.touched)}" required
+                    minlength="2" />
+                <div *ngIf="lastname.invalid && lastname.touched" class="invalid-feedback">
+                    <div *ngIf="lastname?.errors.required">Last Name is required</div>
+                    <div *ngIf="lastname?.errors.minlength">Last Name must be at least 2 characters long.</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b>Age:</b>
+                <input type="number" value="20" class="form-control" [(ngModel)]="playerCreateData.age" name="age"
+                    #age="ngModel" required minlength="2" maxlength="2"
+                    [ngClass]="{'is-invalid': age.invalid && (age.dirty || age.touched)}" />
+                <div *ngIf="age.invalid && age.touched" class="invalid-feedback">
+                    <div *ngIf="age?.errors.required">Your age is required</div>
+                    <div *ngIf="age?.errors.minlength">Your age has to be above 10 to participate.</div>
+                    <div *ngIf="age?.errors.maxlength">You can't be over 99 years if you want to participate.</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b>Length (in centimeters):</b>
+                <input type="number" value="180" class="form-control" [(ngModel)]="playerCreateData.length" name="length"
+                    #length="ngModel" minlength="3" maxlength="3" required
+                    [ngClass]="{'is-invalid': length.invalid && (length.dirty || length.touched)}" />
+                <div *ngIf="length.invalid && length.touched" class="invalid-feedback">
+                    <div *ngIf="length?.errors.required">Your length is required</div>
+                    <div *ngIf="length?.errors.maxlength">Your length can only be 3 digits.</div>
+                    <div *ngIf="length?.errors.minlength">Your length must be at least 3 digits.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <b>Weight (in Kg):</b>
+                <input type="number" value="75" minlength="2" maxlength="3" class="form-control"
+                    [(ngModel)]="playerCreateData.weight" name="weight" #weight="ngModel" required
+                    [ngClass]="{'is-invalid': weight.invalid && (weight.dirty || weight.touched)}" />
+                <div *ngIf="weight.invalid && weight.touched" class="invalid-feedback">
+                    <div *ngIf="weight?.errors.required">Your weight is required</div>
+                    <div *ngIf="length?.errors.minlength">Your must at least be 2 digits.</div>
+                    <div *ngIf="length?.errors.maxLength">Your weight can only be 3 digits.</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b>Image (link):</b>
+                <input type="text" class="form-control" [(ngModel)]="playerCreateData.imageLink" name="imageLink"
+                    #imageLink="ngModel" required
+                    [ngClass]="{'is-invalid': imageLink.invalid && (imageLink.dirty || imageLink.touched)}" />
+                <div *ngIf="imageLink.invalid && imageLink.touched" class="invalid-feedback">
+                    <div *ngIf="imageLink?.errors.required">An image is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <b>Club:</b>
+                <select class="custom-select mr-sm-2" id="club" name="club"
+                    [(ngModel)]="playerCreateData.club" #club="ngModel" required>
+                    <option selected>Choose...</option>
+                    <option *ngFor="let club of clubs">
+                        {{ club._id }}
+                    </option>
+                </select>
+                <div *ngIf="club.invalid && club.touched" class="invalid-feedback">
+                    <div *ngIf="club?.errors.required">An Club is required</div>
+                </div>
+            </div>
+
+            <div class="form-group float-left">
+                <a routerLink="/players" routerLinkActive="active" class="btn btn-primary mr-2">Return</a>
+                <button type="submit" (ngSubmit)="createPlayer()" class="btn btn-success float-right"
+                    [disabled]="!playerCreateForm.valid">
+                    Save
+                </button>
+            </div>
+
+            <!-- <input [(ngModel)]="playerCreateData.firstname" name="firstname" type="text" placeholder="firstname" ngModel required />
+            <input [(ngModel)]="playerCreateData.lastname" name="lastname" type="text" placeholder="lastname" ngModel
+                required />
+            <input [(ngModel)]="playerCreateData.age" name="age" type="number" placeholder="age" min="16" max="55"
+                ngModel required />
+            <input [(ngModel)]="playerCreateData.length" name="length" type="number" placeholder="length" ngModel
+                required />
+            <input [(ngModel)]="playerCreateData.weight" name="weight" type="number" placeholder="weight" ngModel
+                required />
+            <input [(ngModel)]="playerCreateData.imageLink" name="imageLink" type="text" placeholder="imageLink" ngModel
+                required />
+            <select [(ngModel)]="playerCreateData.club" type="text" class="form-control" id="club" name="club" ngModel
+                required>
+                <option *ngFor="let club of clubs" ng-value="club._id">{{club._id}}</option>
+            </select>
+            <button routerLink="/players" routerLinkActive="active" (click)="createPlayer()" type="button"
+                class="btn btn-warning warningbutton mt-3">Confirm</button> -->
         </form>
-        <a routerLink="/players" routerLinkActive="active" class="btn btn-primary mt-2">Return</a>
-    </div>
-</div>
-<div *ngIf="showResultBox">
-    <div class="content login-page form login-form">
-        <h4>{{displayresult.result}}</h4>
-        <p>{{displayresult.message}}</p>
     </div>
 </div>

@@ -1,20 +1,53 @@
-<app-header></app-header>
 <div class="login-page">
     <div class="form">
-        <form class="login-form">
+        <form #clubCreateForm="ngForm" name="form" (ngSubmit)="clubCreateForm.form.valid && createClub()" novalidate>
             <h4>Create a new Club:<br> <br></h4>
-            <input [(ngModel)]="clubCreateData.name" name="name" type="text" placeholder="name" />
-            <input [(ngModel)]="clubCreateData.foundingyear" name="foundingyear" type="text" placeholder="foundingyear" />
-            <input [(ngModel)]="clubCreateData.funds" name="funds" type="text" placeholder="funds" />
-            <input [(ngModel)]="clubCreateData.logo" name="logo" type="text" placeholder="logo" />
-            <button routerLink="/clubs" routerLinkActive="active" (click)="createClub()" type="button" class="btn btn-warning warningbutton">Confirm</button>
+            <div class="form-group">
+                <b>Name:</b>
+                <input type="text" class="form-control" [(ngModel)]="clubCreateData.name" name="name" #name="ngModel"
+                    [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}" required minlength="2" />
+                <div *ngIf="name.invalid && name.touched" class="invalid-feedback">
+                    <div *ngIf="name?.errors.required">A name is required</div>
+                    <div *ngIf="name?.errors.minlength">The minimum length is 2 digits.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <b>Foundingyear:</b>
+                <input type="number" class="form-control" [(ngModel)]="clubCreateData.foundingyear" name="foundingyear"
+                    #foundingyear="ngModel"
+                    [ngClass]="{'is-invalid': foundingyear.invalid && (foundingyear.dirty || foundingyear.touched)}"
+                    required minlength="4" min="1857" />
+                <div *ngIf="foundingyear.invalid && foundingyear.touched" class="invalid-feedback">
+                    <div *ngIf="foundingyear?.errors.required">The foundingyear is required</div>
+                    <div *ngIf="foundingyear?.errors.min">Never has a club been founded before 1857, so yours can't be
+                        either ;).</div>
+                    <div *ngIf="foundingyear?.errors.minlength">The minimum length is 4 digits.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <b>Funds:</b>
+                <input type="number" class="form-control" [(ngModel)]="clubCreateData.funds" name="funds" #funds="ngModel"
+                    [ngClass]="{'is-invalid': funds.invalid && (funds.dirty || funds.touched)}" required minlength="1" />
+                <div *ngIf="funds.invalid && funds.touched" class="invalid-feedback">
+                    <div *ngIf="funds?.errors.required">A funds is required</div>
+                    <div *ngIf="funds?.errors.minlength">The minimum is 1 digit.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <b>Logo:</b>
+                <input type="text" class="form-control" [(ngModel)]="clubCreateData.logo" name="logo" #logo="ngModel"
+                    [ngClass]="{'is-invalid': logo.invalid && (logo.dirty || logo.touched)}" required/>
+                <div *ngIf="logo.invalid && logo.touched" class="invalid-feedback">
+                    <div *ngIf="logo?.errors.required">A logo is required</div>
+                </div>
+            </div>
+            <div class="form-group float-left">
+                <a routerLink="/clubs" routerLinkActive="active" class="btn btn-primary mr-2">Return</a>
+                <button type="submit" (ngSubmit)="createClub()"
+                    class="btn btn-success" [disabled]="!clubCreateForm.valid">
+                    Save
+                </button>
+            </div>
         </form>
-        <a routerLink="/clubs" routerLinkActive="active" class="btn btn-primary mt-2">Return</a>
-    </div>
-</div>
-<div *ngIf="showResultBox">
-    <div class="content login-page form login-form">
-        <h4>{{displayresult.result}}</h4>
-        <p>{{displayresult.message}}</p>
     </div>
 </div>

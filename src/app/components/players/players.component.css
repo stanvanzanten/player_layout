@@ -1,4 +1,9 @@
-.imagelogo{
-    max-width: 50%;
-    max-height: 100%
-  }
+.imagelogo {
+  max-width: 50%;
+  max-height: 100%
+}
+
+.playerlist{
+  max-width: 200px;
+  list-style: none;
+}

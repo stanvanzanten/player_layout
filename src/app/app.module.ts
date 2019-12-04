@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, Subject, ReplaySubject, from, of, range } from 'rxjs';
@@ -27,14 +27,18 @@ import { AboutComponent } from './components/about/about.component'
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'players', component: PlayersComponent },
-  { path: 'clubs', component: ClubsComponent },
+  { path: 'players', component: PlayersComponent,},
+  {path: 'clubs', component: ClubsComponent, children: [
+      {
+        path: 'create',
+        component: ClubsCreateComponent
+      }]
+  },
   { path: 'login', component: LoginComponent },
+  { path: 'club/create', component: ClubsCreateComponent },
+  { path: 'player/create', component: PlayersCreateComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'edit/:id', component: ClubsEditComponent },
-  { path: 'club/create', component: ClubsCreateComponent},
-  { path: 'player/create', component: PlayersCreateComponent},
-  { path: 'about', component: AboutComponent}
+  { path: 'about', component: AboutComponent }
 ];
 
 @NgModule({
@@ -61,6 +65,10 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA
   ],
   providers: [BackendService, AuthService, AuthGuard,
     {

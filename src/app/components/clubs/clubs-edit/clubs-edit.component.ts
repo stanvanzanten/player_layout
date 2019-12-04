@@ -30,6 +30,7 @@ export class ClubsEditComponent implements OnInit {
   clubNewLogo = '';
   clubNewPlayers : [Player];
   players: [];
+  submitted = false;
 
   constructor(
     private _backendService: BackendService,
@@ -57,6 +58,7 @@ export class ClubsEditComponent implements OnInit {
   }
 
   editClub() {
+    this.submitted = true
     if (this._authService.loggedIn) {
     this.clubEdit = new Club( this.club._id, this.clubNewName, this.clubNewYear, this.clubNewFunds, this.clubNewLogo, this.clubNewPlayers)
     this._backendService.editClub(this.clubEdit, this.club._id )

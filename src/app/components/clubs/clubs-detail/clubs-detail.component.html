@@ -22,15 +22,16 @@
       <br />
       <b>Funds:</b>
       <br />
-      {{ club.funds }}
+      {{ club.funds }}M
       <br />
       <b>Players</b>
       <br>
       {{ club.players }}
     </div>
     <!-- <button [routerLink]="['/edit', club._id]" routerLinkActive="active" *ngIf="authService.loggedIn()" (click)="onSelect(club)" type="button" class="btn btn-warning mt-2 mr-2">Edit</button>  -->
+    <a (click)="cancel()" class="btn btn-primary mt-2 mr-2">Cancel</a>
     <button *ngIf="authService.loggedIn()" (click)="onSelect(club)" (click)="toggleChild()" type="button"
-      class="btn btn-warning  mt-2 mr-2">Edit</button>
+      class="btn btn-warning mt-2 mr-2">Edit</button>
     <button *ngIf="authService.loggedIn()" (click)="deleteClub()" type="button"
       class="btn btn-danger mt-2 mr-2">Delete</button>
   </div>

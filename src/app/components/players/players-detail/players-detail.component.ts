@@ -35,6 +35,10 @@ export class PlayersDetailComponent implements OnInit {
     this.selectedPlayer = this.emptyPlayer;
   }
 
+  cancel() {
+    this._playersComp.removeSelectedPlayer();
+  }
+
   toggleChild(){
     this.showVar = !this.showVar;
 }

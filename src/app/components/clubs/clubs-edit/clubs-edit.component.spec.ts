@@ -1,6 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { AuthService } from 'src/app/services/auth.service';
 import { ClubsEditComponent } from './clubs-edit.component';
+import { By } from '@angular/platform-browser';
+
 
 describe('ClubsEditComponent', () => {
   let component: ClubsEditComponent;
@@ -8,9 +15,13 @@ describe('ClubsEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClubsEditComponent ]
-    })
-    .compileComponents();
+      declarations: [
+        ClubsEditComponent
+      ],
+      imports: [RouterTestingModule, RouterModule, FormsModule, ReactiveFormsModule, HttpModule, HttpClientModule 
+      ],
+      providers:[AuthService]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

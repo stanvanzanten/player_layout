@@ -1,12 +1,35 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
+import { Routes, RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AuthService } from './services/auth.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Observable, Subject, ReplaySubject, from, of, range } from 'rxjs';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { PlayersComponent } from './components/players/players.component';
+import { ClubsComponent } from './components/clubs/clubs.component';
+import { PlayersEditComponent } from './components/players/players-edit/players-edit.component';
+import { Location } from '@angular/common';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        HeaderComponent,
+        PlayersComponent,
+        PlayersEditComponent,
+        ClubsComponent
       ],
+      imports: [RouterTestingModule, RouterModule, HttpModule, HttpClientModule, FormsModule, ReactiveFormsModule ],
+      providers: [
+        AuthService
+      ],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));
 
@@ -22,10 +45,8 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('PlayerLayout');
   });
 
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to PlayerLayout!');
+  it('should navigate me to the main page',() =>{
+    const location = TestBed.get(Location);
+    expect(location.path()).toBe('');
   });
 });

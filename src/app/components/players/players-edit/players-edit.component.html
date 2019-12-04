@@ -1,36 +1,83 @@
 <div *ngIf="showMePartially">
   <div *ngIf="player">
-    <div class="content login-page form login-form">
-      <h5 class="card-title">Edit Player: {{player.firstname + player.lastname}}</h5>
-      <hr />
-      <div class="card-text">
-        <b>Firstname (old: {{player.firstname}}):</b>
-        <br>
-        <input [(ngModel)]="playerNewFirstame" name="firstname" type="text" placeholder="firstname" />
-        <br>
-        <b>Lastname (old: {{player.lastname}}):</b>
-        <input [(ngModel)]="playerNewLastname" name="lastname" type="text" placeholder="lastname" />
-        <br>
-        <b>Age (old: {{player.age}}):</b>
-        <input [(ngModel)]="playerNewAge" name="age" type="text" placeholder="age" />
-        <br>
-        <b>Length (old: {{player.length}}):</b>
-        <input [(ngModel)]="playerNewLength" name="length" type="text" placeholder="length" />
-        <br>
-        <b>Weight (old: {{player.weight}}):</b>
-        <input [(ngModel)]="playerNewWeight" name="weight" type="text" placeholder="weight" />
-        <br>
-        <b>Image (old: {{player.imageLink}}):</b>
-        <input [(ngModel)]="playerNewImage" name="imageLink" type="text" placeholder="imageLink" />
-        <br>
-        <b>Club (old: {{player.club.name}}):</b>
-        <!-- <input [(ngModel)]="playerNewClub" name="club" type="range" placeholder="club" /> -->
-        <select [(ngModel)]="playerNewClub" type="text" class="form-control" id="club" name="club">
-            <option *ngFor="let club of clubs">{{club._id}}</option> 
-          </select> 
+    <h5>Edit player: {{player.firstname}}</h5>
+    <form *ngIf="player" #playerEditForm="ngForm" name="form" (ngSubmit)="playerEditForm.form.valid && editPlayer()" novalidate>
+      <div class="form-group">
+        <b>Firstname:</b>
+        <input type="text" class="form-control" [(ngModel)]="playerNewFirstname" name="firstname" #firstname="ngModel"
+          [ngClass]="{'is-invalid': firstname.invalid && (firstname.dirty || firstname.touched)}" required minlength="2" />
+        <div *ngIf="firstname.invalid && firstname.touched" class="invalid-feedback">
+          <div *ngIf="firstname?.errors.required">First Name is required</div>
+          <div *ngIf="firstname?.errors.minlength">First Name must be at least 2 characters long.</div>
+        </div>
       </div>
-      <a (click)="editPlayer()" class="btn btn-warning mt-2 mr-2">Confirm</a>
-      <a (click)="cancel()" class="btn btn-primary mt-2 mr-2">Cancel</a>
-    </div>
+      <div class="form-group">
+        <b>Lastname:</b>
+        <input type="text" class="form-control" [(ngModel)]="playerNewLastname" name="lastname" #lastname="ngModel"
+          [ngClass]="{'is-invalid': lastname.invalid && (lastname.dirty || lastname.touched)}" required minlength="2" />
+        <div *ngIf="lastname.invalid && lastname.touched" class="invalid-feedback">
+          <div *ngIf="lastname?.errors.required">Last Name is required</div>
+          <div *ngIf="lastname?.errors.minlength">Last Name must be at least 2 characters long.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <b>Age:</b>
+        <input type="number" value="20" class="form-control" [(ngModel)]="playerNewAge" name="age"
+          #age="ngModel" required minlength="2" maxlength="2"
+          [ngClass]="{'is-invalid': age.invalid && (age.dirty || age.touched)}" />
+        <div *ngIf="age.invalid && age.touched" class="invalid-feedback">
+          <div *ngIf="age?.errors.required">Your age is required</div>
+          <div *ngIf="age?.errors.minlength">Your age has to be above 10 to participate.</div>
+          <div *ngIf="age?.errors.maxlength">You can't be over 99 years if you want to participate.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <b>Length (in centimeters):</b>
+        <input type="number" value="180" class="form-control" [(ngModel)]="playerNewLength" name="length" #length="ngModel" minlength="3" maxlength="3"
+          required [ngClass]="{'is-invalid': length.invalid && (length.dirty || length.touched)}" />
+        <div *ngIf="length.invalid && length.touched" class="invalid-feedback">
+          <div *ngIf="length?.errors.required">Your length is required</div>
+          <div *ngIf="length?.errors.maxlength">Your length can only be 3 digits.</div>
+          <div *ngIf="length?.errors.minlength">Your length must be at least 3 digits.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <b>Weight (in Kg):</b>
+        <input type="number" value="75" minlength="2" maxlength="3" class="form-control" [(ngModel)]="playerNewWeight" name="weight" #weight="ngModel" required
+          [ngClass]="{'is-invalid': weight.invalid && (weight.dirty || weight.touched)}" />
+        <div *ngIf="weight.invalid && weight.touched" class="invalid-feedback">
+          <div *ngIf="weight?.errors.required">Your weight is required</div>
+          <div *ngIf="length?.errors.minlength">Your must at least be 2 digits.</div>
+          <div *ngIf="length?.errors.maxLength">Your weight can only be 3 digits.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <b>Image (link):</b>
+        <input type="text" class="form-control" [(ngModel)]="playerNewImage" name="image" #image="ngModel"
+          required [ngClass]="{'is-invalid': image.invalid && (image.dirty || image.touched)}" />
+        <div *ngIf="image.invalid && image.touched" class="invalid-feedback">
+          <div *ngIf="image?.errors.required">An image is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <b>Club:</b>
+        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="club" [(ngModel)]="playerNewClub"
+          #club="ngModel" required>
+          <option selected>Choose...</option>
+          <option *ngFor="let club of clubs">
+            {{ club._id }}
+          </option>
+        </select>
+        <div *ngIf="club.invalid && club.touched" class="invalid-feedback">
+          <div *ngIf="club?.errors.required">An Club is required</div>
+        </div>
+      </div>
+      <div class="form-group float-left">
+        <a routerLink="/players" routerLinkActive="active"  class="btn btn-primary mr-2">Cancel</a>
+        <button type="submit" (ngSubmit)="editClub()" class="btn btn-success float-right" [disabled]="!playerEditForm.valid">
+          Save
+        </button>
+      </div>
+    </form>
   </div>
 </div>

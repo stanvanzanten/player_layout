@@ -1,29 +1,56 @@
 <div *ngIf="showMePartially">
-<div *ngIf="club">
-  <div class="content login-page form login-form">
-    <h5 class="card-title">Edit club: {{club.name}}</h5>
-    <hr />
-    <div class="card-text">
-      <b>Name (old: {{club.name}}):</b>
-      <br>
-      <input [(ngModel)]="clubNewName" name="name" type="text" placeholder="name" />
-      <br>
-      <b>Founding year (old: {{club.foundingyear}}):</b>
-      <input [(ngModel)]="clubNewYear" name="foundingyear" type="text" placeholder="foundingyear" />
-      <br>
-      <b>Funds (old: {{club.funds}}):</b>
-      <input [(ngModel)]="clubNewFunds" name="funds" type="text" placeholder="funds" />
-      <br>
-      <b>Logo (old: {{club.logo}}):</b>
-      <input [(ngModel)]="clubNewLogo" name="logo" type="text" placeholder="logo" />
-      <br>
-      <b>Players:</b>
-      <select *ngFor= "let player of players;">
-          <option *ngFor="let player of players">{{player._id}}</option> 
-      </select>
+  <div *ngIf="club">
+    <!-- <div class="content">
+      <h5 class="card-title">Edit club: {{club.name}}</h5>
+      <hr /> -->
+  <h5>Edit club: {{club.name}}</h5>
+  <form *ngIf="club" #clubEditForm="ngForm" name="form" (ngSubmit)="clubEditForm.form.valid && editClub()" novalidate>
+    <div class="form-group">
+      <b>Name:</b>
+      <input type="text" class="form-control" [(ngModel)]="clubNewName" name="name" #name="ngModel"
+        [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}" required minlength="2" />
+      <div *ngIf="name.invalid && name.touched" class="invalid-feedback">
+        <div *ngIf="name?.errors.required">Name is required</div>
+        <div *ngIf="name?.errors.minlength">Name must be at least 2 characters long.</div>
+      </div>
     </div>
-    <a (click)="editClub()" class="btn btn-warning mt-2 mr-2">Confirm</a>
-    <a (click)="cancel()" class="btn btn-primary mt-2 mr-2">Cancel</a>
-  </div>
+    <div class="form-group">
+      <b>Foundingyear:</b>
+      <input type="number" value="1990" class="form-control" [(ngModel)]="clubNewYear" name="foundingyear" #foundingyear="ngModel" required minlength="4" maxlength="5" min="1857" max="2021"
+        [ngClass]="{'is-invalid': foundingyear.invalid && (foundingyear.dirty || foundingyear.touched)}"/>
+      <div *ngIf="foundingyear.invalid && foundingyear.touched" class="invalid-feedback">
+        <div *ngIf="foundingyear?.errors.required">Foundingyear is required</div>
+        <div *ngIf="foundingyear?.errors.minlength">The foundingyear can only be 4 digits long.</div>
+        <div *ngIf="foundingyear?.errors.maxlength">The foundingyear can only be 4 digits long.</div>
+        <div *ngIf="foundingyear?.errors.min">Never has a club been founded before 1857 ;)</div>
+        <div *ngIf="foundingyear?.errors.max">Don't plan to far ahead friend, the limit is 2021.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <b>Funds (in miljoenen):</b>
+      <input type="number" value="1990" class="form-control" [(ngModel)]="clubNewFunds" name="funds"
+        #funds="ngModel" required
+        [ngClass]="{'is-invalid': funds.invalid && (funds.dirty || funds.touched)}" />
+      <div *ngIf="funds.invalid && funds.touched" class="invalid-feedback">
+        <div *ngIf="funds?.errors.required">Funds is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <b>Logo (link):</b>
+      <input type="text" value="1990" class="form-control" [(ngModel)]="clubNewLogo" name="logo" #logo="ngModel" required
+        [ngClass]="{'is-invalid': logo.invalid && (logo.dirty || logo.touched)}" />
+      <div *ngIf="logo.invalid && logo.touched" class="invalid-feedback">
+        <div *ngIf="logo?.errors.required">logo is required</div>
+      </div>
+    </div>
+    <div class="form-group float-left">
+      <a (click)="cancel()" class="btn btn-primary mr-2">Cancel</a>
+      <button type="submit" (ngSubmit)="editClub()" class="btn btn-success float-right" [disabled]="!clubEditForm.valid">
+        Save
+      </button>
+    </div>
+  </form>
 </div>
 </div>
+<!-- </div>
+</div> -->

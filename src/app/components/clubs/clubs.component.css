@@ -1,4 +1,9 @@
-.imagelogo{
+.imagelogo {
   max-width: 30%;
   max-height: 50%
+}
+
+.clublist{
+  max-width: 200px;
+  list-style: none;
 }

@@ -55,4 +55,8 @@ export class ClubsDetailComponent implements OnInit {
       err => console.log(err)
     )
   }
+
+  cancel() {
+    this._clubsComp.removeSelectedClub();
+  }
 }
