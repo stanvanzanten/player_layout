@@ -7,6 +7,7 @@ export class Game {
         public location: String,
         public startTime: Date,
         public endTime: Date,
-        public clubs?: [Club]
+        public clubOne: Club,
+        public clubTwo: Club
     ) { }
 }

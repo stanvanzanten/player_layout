@@ -26,7 +26,8 @@ export class GamesEditComponent implements OnInit {
   gameNewLocation = '';
   gameNewStartTime = new Date;
   gameNewEndTime = new Date;
-  gameNewClubs: [Club];
+  gameNewClubOne: Club;
+  gameNewClubTwo: Club;
   clubs: [];
   submitted = false;
 
@@ -59,7 +60,7 @@ export class GamesEditComponent implements OnInit {
   editGame() {
     this.submitted = true
     if (this._authService.loggedIn) {
-      this.gameEdit = new Game(this.game._id, this.gameNewDate, this.gameNewLocation, this.gameNewStartTime, this.gameNewEndTime, this.gameNewClubs)
+      this.gameEdit = new Game(this.game._id, this.gameNewDate, this.gameNewLocation, this.gameNewStartTime, this.gameNewEndTime, this.gameNewClubOne, this.gameNewClubTwo)
       this._backendService.editGame(this.gameEdit, this.game._id)
         .subscribe(
           res => {

@@ -1,6 +1,6 @@
 <div *ngIf="showMePartially">
   <div *ngIf="game">
-    <h5>Edit game: {{game.location}}</h5>
+    <h5>Edit game: {{game.clubOne.name | uppercase}} vs {{game.clubTwo.name | uppercase}}</h5>
     <form #gameEditForm="ngForm" name="form" (ngSubmit)="gameEditForm.form.valid && editGame()" novalidate>
       <div class="form-group">
         <b>Date:</b>
@@ -37,16 +37,29 @@
         </div>
       </div>
       <div class="form-group">
-        <b>Club:</b>
-        <select class="custom-select mr-sm-2" id="club" name="club" [(ngModel)]="gameNewClubs" #club="ngModel"
+        <b>Home side:</b>
+        <select class="custom-select mr-sm-2" id="clubOne" name="clubOne" [(ngModel)]="gameNewClubOne" #clubOne="ngModel"
           required>
           <option selected>Choose...</option>
           <option *ngFor="let club of clubs">
             {{ club._id }}
           </option>
         </select>
-        <div *ngIf="club.invalid && club.touched" class="invalid-feedback">
-          <div *ngIf="club?.errors.required">An Club is required</div>
+        <div *ngIf="clubOne.invalid && clubOne.touched" class="invalid-feedback">
+          <div *ngIf="clubOne?.errors.required">An Club is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <b>Away side:</b>
+        <select class="custom-select mr-sm-2" id="clubTwo" name="clubTwo" [(ngModel)]="gameNewClubTwo" #clubTwo="ngModel" required>
+          <option selected>Choose...</option>
+          <option *ngFor="let club of clubs">
+            {{ club._id }}
+          </option>
+        </select>
+        <div *ngIf="clubTwo.invalid && clubTwo.touched" class="invalid-feedback">
+          <div *ngIf="clubTwo?.errors.required">An Club is required</div>
         </div>
       </div>
       <div class="form-group float-left">

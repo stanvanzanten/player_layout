@@ -1,20 +1,26 @@
 <br>
 <div class="container">
+  <div class="createbutton text-center pb-3">
+    <a *ngIf="authService.loggedIn()" routerLink='/game/create' routerLinkActive="active" class="btn btn-dark">Create
+      game</a>
+  </div>
   <div class="row">
     <ul class="pb-3 gamelist" *ngFor="let game of games">
       <li *ngIf="isPopGame(game)">
         <h4>{{game.location}}</h4>
-        <h5 class="card-title">{{game.date | date: 'dd/MM/yyyy'}}</h5>
+        <!-- <h5 class="card-title">{{game.date | date: 'dd/MM/yyyy'}}</h5> -->
+        <h5 class="card-title">
+          <img [src]="game.clubOne.logo" alt="" class="img-rounded imagelogo">
+          VS
+          <img [src]="game.clubTwo.logo" alt="" class="img-rounded imagelogo">
+        </h5>
+        <div class="text-center pt-2">
         <a (click)="onSelect(game)" class="btn btn-success">More info</a>
+        </div>
       </li>
     </ul>
     <div class="col-9">
       <app-games-detail [game]="selectedGame"></app-games-detail>
     </div>
-  </div>
-  <br>
-  <div class="createbutton">
-    <a *ngIf="authService.loggedIn()" routerLink='/game/create' routerLinkActive="active" class="btn btn-dark">Create
-      game</a>
   </div>
 </div>

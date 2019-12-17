@@ -1,5 +1,9 @@
 <br>
 <div class="container">
+  <div class="createbutton text-center pb-3">
+    <a *ngIf="authService.loggedIn()" routerLink='/player/create' routerLinkActive="active" class="btn btn-dark">Create
+      player</a>
+  </div>
 <div class="row text-center">
     <ul class="pb-3 playerlist" *ngFor="let player of players">
       <li *ngIf="isPopPlayer(player)">
@@ -14,9 +18,4 @@
       <app-players-detail [player]="selectedPlayer"></app-players-detail>
     </div>
 </div>
-<br>
-<div class="createbutton">
-    <a *ngIf="authService.loggedIn()" routerLink='/player/create' routerLinkActive="active" class="btn btn-dark">Create
-      player</a>
-  </div>
 </div>

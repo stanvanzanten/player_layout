@@ -38,16 +38,30 @@
         </div>
       </div>
       <div class="form-group">
-        <b>Club:</b>
-        <select class="custom-select mr-sm-2" id="club" name="club" [(ngModel)]="gameCreateData.clubs" #club="ngModel"
+        <b>Home side:</b>
+        <select class="custom-select mr-sm-2" id="clubOne" name="clubOne" [(ngModel)]="gameCreateData.clubOne" #clubOne="ngModel"
           required>
           <option selected>Choose...</option>
           <option *ngFor="let club of clubs">
             {{ club._id }}
           </option>
         </select>
-        <div *ngIf="club.invalid && club.touched" class="invalid-feedback">
-          <div *ngIf="club?.errors.required">An Club is required</div>
+        <div *ngIf="clubOne.invalid && clubOne.touched" class="invalid-feedback">
+          <div *ngIf="clubOne?.errors.required">An Club is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <b>Away side:</b>
+        <select class="custom-select mr-sm-2" id="clubTwo" name="clubTwo" [(ngModel)]="gameCreateData.clubTwo" #clubTwo="ngModel"
+          required>
+          <option selected>Choose...</option>
+          <option *ngFor="let club of clubs">
+            {{ club._id }}
+          </option>
+        </select>
+        <div *ngIf="clubTwo.invalid && clubTwo.touched" class="invalid-feedback">
+          <div *ngIf="clubTwo?.errors.required">An Club is required</div>
         </div>
       </div>
 

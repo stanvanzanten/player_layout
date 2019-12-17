@@ -1,5 +1,9 @@
 <br>
 <div class="container">
+    <div class="createbutton text-center pb-3">
+      <a *ngIf="authService.loggedIn()" routerLink='/club/create' routerLinkActive="active" class="btn btn-dark">Create
+        club</a>
+    </div>
   <div class="row">
     <ul class="pb-3 clublist" *ngFor="let club of clubs">
       <li *ngIf="isPopClub(club)">
@@ -13,9 +17,5 @@
     <div class="col-9">
       <app-clubs-detail [club]="selectedClub"></app-clubs-detail>
     </div>
-  </div>
-  <br>
-  <div class="createbutton">
-    <a *ngIf="authService.loggedIn()" routerLink='/club/create' routerLinkActive="active" class="btn btn-dark">Create club</a>
   </div>
 </div>

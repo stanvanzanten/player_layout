@@ -3,11 +3,10 @@
     <div *ngIf="game">
       <div class="content login-page form login-form">
         <h5 class="card-title">
-          {{game.location}}
+          {{game.clubOne.name | uppercase}} vs {{game.clubTwo.name | uppercase}}
         </h5>
         <hr />
         <div>
-          <br>
           <b>Location:</b>
           <br />
           {{game.location}}
@@ -24,9 +23,13 @@
           <br>
           {{ game.endTime | date: 'HH:mm' }}
           <br>
-          <b>Clubs</b>
+          <b>Home side</b>
           <br>
-          {{ game.clubs[0].name }}
+          {{ game.clubOne.name }}
+          <br>
+          <b>Away side</b>
+          <br>
+          {{ game.clubTwo.name }}
         </div>
         <a (click)="cancel()" class="btn btn-primary mt-2 mr-2">Cancel</a>
         <button *ngIf="authService.loggedIn()" (click)="onSelect(game)" (click)="toggleChild()" type="button"
