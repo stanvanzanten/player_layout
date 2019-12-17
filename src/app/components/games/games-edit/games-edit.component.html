@@ -1,0 +1,63 @@
+<div *ngIf="showMePartially">
+  <div *ngIf="game">
+    <h5>Edit game: {{game.location}}</h5>
+    <form #gameEditForm="ngForm" name="form" (ngSubmit)="gameEditForm.form.valid && editGame()" novalidate>
+      <div class="form-group">
+        <b>Date:</b>
+        <input type="date" class="form-control" [(ngModel)]="gameNewDate" name="date" #date="ngModel"
+          [ngClass]="{'is-invalid': date.invalid && (date.dirty || date.touched)}" required />
+        <div *ngIf="date.invalid && date.touched" class="invalid-feedback">
+          <div *ngIf="date?.errors.required">A date is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <b>Location:</b>
+        <input type="text" class="form-control" [(ngModel)]="gameNewLocation" name="location" #location="ngModel"
+          [ngClass]="{'is-invalid': location.invalid && (location.dirty || location.touched)}" required minlength="4" />
+        <div *ngIf="location.invalid && location.touched" class="invalid-feedback">
+          <div *ngIf="location?.errors.required">The location is required</div>
+          <div *ngIf="location?.errors.minlength">The minimum length is 4 digits.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <b>Starttime:</b>
+        <input type="datetime-local" class="form-control" [(ngModel)]="gameNewStartTime" name="startTime"
+          #startTime="ngModel" [ngClass]="{'is-invalid': startTime.invalid && (startTime.dirty || startTime.touched)}"
+          required />
+        <div *ngIf="startTime.invalid && startTime.touched" class="invalid-feedback">
+          <div *ngIf="startTime?.errors.required">A startTime is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <b>Endtime:</b>
+        <input type="datetime-local" class="form-control" [(ngModel)]="gameNewEndTime" name="endTime" #endTime="ngModel"
+          [ngClass]="{'is-invalid': endTime.invalid && (endTime.dirty || endTime.touched)}" required />
+        <div *ngIf="endTime.invalid && endTime.touched" class="invalid-feedback">
+          <div *ngIf="endTime?.errors.required">A endtime is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <b>Club:</b>
+        <select class="custom-select mr-sm-2" id="club" name="club" [(ngModel)]="gameNewClubs" #club="ngModel"
+          required>
+          <option selected>Choose...</option>
+          <option *ngFor="let club of clubs">
+            {{ club._id }}
+          </option>
+        </select>
+        <div *ngIf="club.invalid && club.touched" class="invalid-feedback">
+          <div *ngIf="club?.errors.required">An Club is required</div>
+        </div>
+      </div>
+      <div class="form-group float-left">
+        <a (click)="cancel()" class="btn btn-primary mr-2">Cancel</a>
+        <button type="submit" (ngSubmit)="editGame()" class="btn btn-success float-right"
+          [disabled]="!gameEditForm.valid">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- </div>
+</div> -->

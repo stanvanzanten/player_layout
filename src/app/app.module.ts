@@ -23,7 +23,11 @@ import { ClubsEditComponent } from './components/clubs/clubs-edit/clubs-edit.com
 import { PlayersEditComponent } from './components/players/players-edit/players-edit.component';
 import { ClubsCreateComponent } from './components/clubs/clubs-create/clubs-create.component';
 import { PlayersCreateComponent } from './components/players/players-create/players-create.component';
-import { AboutComponent } from './components/about/about.component'
+import { AboutComponent } from './components/about/about.component';
+import { GamesComponent } from './components/games/games.component';
+import { GamesDetailComponent } from './components/games/games-detail/games-detail.component';
+import { GamesCreateComponent } from './components/games/games-create/games-create.component';
+import { GamesEditComponent } from './components/games/games-edit/games-edit.component'
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,6 +40,8 @@ const appRoutes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'club/create', component: ClubsCreateComponent },
+  { path: 'games', component: GamesComponent},
+  { path: 'game/create', component: GamesCreateComponent},
   { path: 'player/create', component: PlayersCreateComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'about', component: AboutComponent }
@@ -56,7 +62,11 @@ const appRoutes: Routes = [
     PlayersEditComponent,
     ClubsCreateComponent,
     PlayersCreateComponent,
-    AboutComponent
+    AboutComponent,
+    GamesComponent,
+    GamesDetailComponent,
+    GamesCreateComponent,
+    GamesEditComponent
   ],
   imports: [
     BrowserModule,

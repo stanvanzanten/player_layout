@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col">
+    <div *ngIf="game">
+      <div class="content login-page form login-form">
+        <h5 class="card-title">
+          {{game.location}}
+        </h5>
+        <hr />
+        <div>
+          <br>
+          <b>Location:</b>
+          <br />
+          {{game.location}}
+          <br />
+          <b>Date:</b>
+          <br />
+          {{game.date | date: 'dd/MM/yyyy'}}
+          <br />
+          <b>Start time:</b>
+          <br />
+          {{ game.startTime | date: 'HH:mm'}}
+          <br />
+          <b>End time</b>
+          <br>
+          {{ game.endTime | date: 'HH:mm' }}
+          <br>
+          <b>Clubs</b>
+          <br>
+          {{ game.clubs[0].name }}
+        </div>
+        <a (click)="cancel()" class="btn btn-primary mt-2 mr-2">Cancel</a>
+        <button *ngIf="authService.loggedIn()" (click)="onSelect(game)" (click)="toggleChild()" type="button"
+          class="btn btn-warning mt-2 mr-2">Edit</button>
+        <button *ngIf="authService.loggedIn()" (click)="deleteGame()" type="button"
+          class="btn btn-danger mt-2 mr-2">Delete</button>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <app-games-edit [game]="selectedGame" [showMePartially]="showVar"></app-games-edit>
+  </div>
+</div>

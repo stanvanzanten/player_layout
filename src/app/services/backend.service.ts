@@ -15,6 +15,7 @@ export class BackendService {
     public _playerUrl = environment.serverUrl + "/api/player/";
     public _clubUrl = environment.serverUrl + "/api/club/"
     public _userUrl = environment.serverUrl + "/api/user/";
+    public _gameUrl = environment.serverUrl + "/api/game/";
 
     constructor(private http: HttpClient ){}
 
@@ -115,4 +116,43 @@ export class BackendService {
     return this.http.delete<any>(this._clubUrl + _id, httpOptions );
     }
     
+  //Game getters and setters
+
+  getGames() {
+    return this.http.get<any>(this._gameUrl);
+  }
+
+  getGame(_id: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        '_id': _id
+      })
+    };
+    return this.http.get<any>(this._gameUrl, httpOptions);
+  }
+
+  getGameById(_id: any) {
+    return this.http.get<any>(this._gameUrl + '' + _id);
+  }
+
+  createGame(game: {}) {
+    console.log(game)
+    return this.http.post<any>(this._gameUrl, game);
+  }
+
+  editGame(game: {}, _id: any) {
+    console.log(game)
+    return this.http.put<any>(this._gameUrl + _id, game);
+  }
+
+  deleteGame(_id: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        '_id': _id
+      })
+    };
+    return this.http.delete<any>(this._gameUrl + _id, httpOptions);
+  }
 }
