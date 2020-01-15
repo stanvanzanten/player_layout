@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { BackendService } from 'src/app/services/backend.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Game } from 'src/app/models/game.model';
@@ -8,6 +8,11 @@ import { Game } from 'src/app/models/game.model';
   templateUrl: './games.component.html',
   styleUrls: ['./games.component.css']
 })
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  
 export class GamesComponent implements OnInit {
 
   games = []

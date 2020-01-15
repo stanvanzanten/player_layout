@@ -9,19 +9,40 @@ import { Observable, Subject, ReplaySubject, from, of, range } from 'rxjs';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PlayersComponent } from './players.component';
+import { BackendService } from 'src/app/services/backend.service';
 
 describe('PlayersComponent', () => {
   let component: PlayersComponent;
   let fixture: ComponentFixture<PlayersComponent>;
 
+  const mockData = [
+    {
+      _id: 1,
+      firstname: 'Stan',
+      lastname: 'van Zanten',
+      age: 21,
+      length: 184,
+      weight: 72,
+      imageLink: 'TestImage',
+      club: ''
+    }
+  ];
+
+  let playerServiceSpy: { getPlayers: jasmine.Spy }
+
+
   beforeEach(async(() => {
+
+    playerServiceSpy = jasmine.createSpyObj('PlayerService', ['getPlayers'])
+
     TestBed.configureTestingModule({
       declarations: [
         PlayersComponent
       ],
       imports: [RouterTestingModule, RouterModule, HttpModule, HttpClientModule, FormsModule, ReactiveFormsModule],
       providers: [
-        AuthService
+        AuthService,
+        {provide: BackendService, useValue: playerServiceSpy }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -30,10 +51,33 @@ describe('PlayersComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayersComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  afterEach(() => {
+    fixture.destroy()
+  })
+
+
+  it('should create', async () => {
+    playerServiceSpy.getPlayers.and.returnValue(of([]))
+
+    fixture.whenStable().then(() => {
+      fixture.detectChanges()
+      expect(component).toBeTruthy()
+      expect(component.players.length).toBe(0)
+    })
   });
+
+  it('should display a correct list of users', () => {
+    playerServiceSpy.getPlayers.and.returnValue(of([mockData, mockData]))
+
+    fixture.whenStable().then(() => {
+      fixture.detectChanges()
+      expect(component).toBeTruthy()
+      expect(component.players.length).toBe(2)
+      expect(component.players[0].firstname).toBe('Stan')
+      expect(component.players[0]._id.toString()).toEqual('1')
+    })
+  });
+  
 });

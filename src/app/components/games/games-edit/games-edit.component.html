@@ -41,8 +41,8 @@
         <select class="custom-select mr-sm-2" id="clubOne" name="clubOne" [(ngModel)]="gameNewClubOne" #clubOne="ngModel"
           required>
           <option selected>Choose...</option>
-          <option *ngFor="let club of clubs">
-            {{ club._id }}
+          <option *ngFor="let club of clubs" [value]="club._id">
+            {{ club.name }}
           </option>
         </select>
         <div *ngIf="clubOne.invalid && clubOne.touched" class="invalid-feedback">
@@ -54,8 +54,8 @@
         <b>Away side:</b>
         <select class="custom-select mr-sm-2" id="clubTwo" name="clubTwo" [(ngModel)]="gameNewClubTwo" #clubTwo="ngModel" required>
           <option selected>Choose...</option>
-          <option *ngFor="let club of clubs">
-            {{ club._id }}
+          <option *ngFor="let club of clubs" [value]="club._id">
+            {{ club.name }}
           </option>
         </select>
         <div *ngIf="clubTwo.invalid && clubTwo.touched" class="invalid-feedback">

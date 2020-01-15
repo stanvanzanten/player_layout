@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 })
 export class ClubsComponent implements OnInit {
   
-  clubs = []
+  clubs: Club[] = [];
   id : number;
   selectedClub : Club;
   @Input() importClub: Club;
