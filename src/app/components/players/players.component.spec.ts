@@ -68,7 +68,7 @@ describe('PlayersComponent', () => {
     })
   });
 
-  it('should display a correct list of users', () => {
+  it('should display a correct list of players', () => {
     playerServiceSpy.getPlayers.and.returnValue(of([mockData, mockData]))
 
     fixture.whenStable().then(() => {

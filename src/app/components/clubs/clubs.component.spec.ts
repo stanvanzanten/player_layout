@@ -27,11 +27,11 @@ describe('ClubsComponent', () => {
     }
   ];
 
-  let clubServiceSpy : { getClubs: jasmine.Spy }
+  let clubServiceSpy : { getClubs: jasmine.Spy, onSelect: jasmine.Spy }
 
   beforeEach(async(() => {
 
-    clubServiceSpy = jasmine.createSpyObj('ClubService', ['getClubs'])
+    clubServiceSpy = jasmine.createSpyObj('ClubService', ['getClubs', 'onSelect'])
 
     TestBed.configureTestingModule({
       declarations: [
@@ -63,7 +63,7 @@ describe('ClubsComponent', () => {
     })
   });
 
-  it('should display a correct list of users', () => {
+  it('should display a correct list of clubs', () => {
     clubServiceSpy.getClubs.and.returnValue(of([mockData, mockData]))
 
      fixture.whenStable().then(() => {
@@ -74,6 +74,17 @@ describe('ClubsComponent', () => {
       expect(component.clubs[0]._id.toString()).toEqual('1')
      })
   });
+
+  it('should show one selected club', () => {
+    clubServiceSpy.onSelect(mockData)
+
+    fixture.whenStable().then(() => {
+      fixture.detectChanges()
+      expect(component).toBeTruthy()
+      expect(component.clubs.length).toBe(1)
+      expect(component.clubs[0]._id.toString()).toEqual('1')
+    })
+  })
 
   it('should show 1 unordered list item', () => {
     const unorderedList = fixture.debugElement.queryAll(By.css('ul'));
